@@ -1,0 +1,49 @@
+{
+  "name": "node-fastify",
+  "version": "1.0.0",
+  "description": "Fastify powered NodeJS application runtime",
+  "private": true,
+  "main": "app.ts",
+  "scripts": {
+    "start": "npm run build:ts && fastify start -l info dist/app.js",
+    "build:ts": "tsc",
+    "watch:ts": "tsc -w",
+    "dev": "npm run build:ts && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
+    "dev:start": "fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js",
+    "test": "npm run build:ts && tsc -p test/tsconfig.json && tap --ts \"test/**/*.test.ts\"",
+    "lint": "eslint . && prettier -c \"**/*.js\" \"**/*.ts\"",
+    "fmt": "prettier --write \"**/*.js\" \"**/*.ts\""
+  },
+  "engines": {
+    "node": "18 || 19 || 20 || 21"
+  },
+  "dependencies": {
+    "@fastify/autoload": "^5.8.0",
+    "@fastify/sensible": "^5.5.0",
+    "@fastify/static": "^6.10.2",
+    "@fastify/websocket": "^8.2.0",
+    "fastify": "^4.20.0",
+    "pg": "^8.11.1",
+    "ws": "^8.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.4",
+    "@types/pg": "^8.10.2",
+    "@types/tap": "^15.0.10",
+    "@types/ws": "^8.5.5",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard-with-typescript": "^39.1.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "fastify-tsconfig": "^2.0.0",
+    "prettier": "^3.0.0",
+    "tap": "^18.5.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
