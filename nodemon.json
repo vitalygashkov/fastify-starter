@@ -1,0 +1,4 @@
+{
+  "execMap": { "ts": "ts-node" },
+  "ignore": ["*.{spec,test}.ts"]
+}
